@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kit de Cobro para Freelancers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:           #080c14;
+            --bg-1:         #0f1623;
+            --bg-2:         #141e2e;
+            --bg-3:         #1a2539;
+            --bg-input:     #0d1322;
+            --border:       rgba(255,255,255,0.06);
+            --border-hover: rgba(255,255,255,0.12);
+            --gold:         #f5a623;
+            --gold-light:   #fbbf24;
+            --gold-glow:    rgba(245,166,35,0.18);
+            --gold-dim:     rgba(245,166,35,0.10);
+            --red:          #f05252;
+            --red-glow:     rgba(240,82,82,0.15);
+            --green:        #22c55e;
+            --green-glow:   rgba(34,197,94,0.13);
+            --blue:         #60a5fa;
+            --blue-glow:    rgba(96,165,250,0.12);
+            --orange:       #fb923c;
+            --orange-glow:  rgba(251,146,60,0.13);
+            --txt-1:        #f0f4ff;
+            --txt-2:        #8ea3c0;
+            --txt-3:        #4d6280;
+            --r-sm: 6px; --r: 12px; --r-lg: 18px; --r-xl: 24px;
+        }
+
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--txt-1);
+            line-height: 1.6;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1,h2,h3,h4 { font-family:'Syne',sans-serif; }
+
+        ::-webkit-scrollbar { width:5px; height:5px; }
+        ::-webkit-scrollbar-track { background:var(--bg); }
+        ::-webkit-scrollbar-thumb { background:var(--bg-3); border-radius:3px; }
+
+        /* ── NAV ── */
+        .nav {
+            position:sticky; top:0; z-index:200;
+            background:rgba(8,12,20,.85);
+            backdrop-filter:blur(24px);
+            -webkit-backdrop-filter:blur(24px);
+            border-bottom:1px solid var(--border);
+            padding:0 28px; height:60px;
+            display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
+        .nav-logo-mark {
+            width:32px; height:32px;
+            background:linear-gradient(135deg,var(--gold) 0%,#e8850a 100%);
+            border-radius:8px; display:grid; place-items:center;
+            font-size:16px; flex-shrink:0; box-shadow:0 4px 12px var(--gold-glow);
+        }
+        .nav-brand-name { font-family:'Syne',sans-serif; font-weight:700; font-size:15px; color:var(--txt-1); line-height:1.2; }
+        .nav-brand-name span { color:var(--gold); }
+        .nav-pill {
+            background:var(--gold-dim); border:1px solid rgba(245,166,35,.25); color:var(--gold);
+            padding:4px 12px; border-radius:20px; font-size:11px; font-weight:600;
+            letter-spacing:.6px; text-transform:uppercase;
+        }
+
+        /* ── HERO ── */
+        .hero { position:relative; overflow:hidden; padding:80px 28px 64px; text-align:center; }
+        .hero::before {
+            content:''; position:absolute; inset:0;
+            background:radial-gradient(ellipse 700px 400px at 50% 0%,rgba(245,166,35,.07) 0%,transparent 70%),
+                        radial-gradient(ellipse 400px 300px at 20% 80%,rgba(240,82,82,.05) 0%,transparent 60%);
+            pointer-events:none;
+        }
+        .hero::after {
+            content:''; position:absolute; inset:0;
+            background-image:linear-gradient(rgba(255,255,255,.015) 1px,transparent 1px),
+                             linear-gradient(90deg,rgba(255,255,255,.015) 1px,transparent 1px);
+            background-size:48px 48px; pointer-events:none;
+            mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 0%,transparent 100%);
+        }
+        .hero-inner { position:relative; z-index:1; max-width:680px; margin:0 auto; }
+        .hero-eyebrow {
+            display:inline-flex; align-items:center; gap:7px;
+            background:var(--red-glow); border:1px solid rgba(240,82,82,.25); color:var(--red);
+            padding:5px 14px; border-radius:20px; font-size:12.5px; font-weight:600;
+            margin-bottom:26px; animation:fadeUp .5s ease both;
+        }
+        .eyebrow-dot { width:7px; height:7px; border-radius:50%; background:var(--red); animation:blink 2s ease infinite; }
+        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+        .hero h1 {
+            font-size:clamp(36px,6vw,62px); font-weight:800; line-height:1.08;
+            letter-spacing:-.5px; margin-bottom:20px; animation:fadeUp .5s ease .08s both;
+        }
+        .hero h1 em { font-style:normal; color:var(--gold); position:relative; }
+        .hero h1 em::after {
+            content:''; position:absolute; bottom:2px; left:0; right:0; height:3px;
+            background:linear-gradient(90deg,var(--gold),var(--gold-light)); border-radius:2px; opacity:.4;
+        }
+        .hero-sub { font-size:17px; color:var(--txt-2); max-width:500px; margin:0 auto 40px; line-height:1.65; animation:fadeUp .5s ease .16s both; }
+        .hero-stats { display:flex; justify-content:center; animation:fadeUp .5s ease .24s both; }
+        .hero-stat { padding:0 36px; text-align:center; border-right:1px solid var(--border); }
+        .hero-stat:last-child { border-right:none; }
+        .hero-stat-num { font-family:'Syne',sans-serif; font-size:26px; font-weight:800; color:var(--gold); line-height:1; }
+        .hero-stat-label { font-size:12px; color:var(--txt-3); margin-top:4px; }
+        @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+
+        /* ── LAYOUT ── */
+        .main { max-width:1120px; margin:0 auto; padding:0 28px 80px; }
+
+        /* ── SETTINGS STRIP ── */
+        .settings-strip {
+            background:var(--bg-1); border:1px solid var(--border); border-radius:var(--r-xl);
+            padding:18px 24px; margin-bottom:20px;
+            display:flex; align-items:flex-end; gap:14px; flex-wrap:wrap;
+        }
+        .strip-label {
+            display:flex; align-items:center; gap:6px; font-size:11px; font-weight:600;
+            color:var(--txt-3); text-transform:uppercase; letter-spacing:.6px;
+            padding-bottom:11px; white-space:nowrap;
+        }
+
+        /* ── FIELD ── */
+        .field { display:flex; flex-direction:column; gap:6px; }
+        .field label { font-size:11px; font-weight:600; color:var(--txt-3); text-transform:uppercase; letter-spacing:.5px; }
+        .field input,.field select,.field textarea {
+            background:var(--bg-input); border:1px solid var(--border); color:var(--txt-1);
+            padding:10px 13px; border-radius:var(--r-sm); font-size:14px;
+            font-family:'DM Sans',sans-serif; transition:border-color .2s,box-shadow .2s;
+            width:100%; appearance:none; resize:none;
+        }
+        .field input:focus,.field select:focus,.field textarea:focus {
+            outline:none; border-color:var(--gold); box-shadow:0 0 0 3px var(--gold-dim);
+        }
+        .field input::placeholder,.field textarea::placeholder { color:var(--txt-3); }
+        .field select option { background:var(--bg-1); }
+
+        /* ── TOOL GRID ── */
+        .tool-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+        @media(max-width:780px){ .tool-grid{grid-template-columns:1fr} }
+
+        /* ── CARD ── */
+        .card { background:var(--bg-1); border:1px solid var(--border); border-radius:var(--r-xl); overflow:hidden; }
+        .card-head {
+            padding:20px 24px 16px; border-bottom:1px solid var(--border);
+            display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+        }
+        .card-title { font-family:'Syne',sans-serif; font-size:15px; font-weight:700; display:flex; align-items:center; gap:10px; }
+        .card-icon { width:28px; height:28px; border-radius:7px; display:grid; place-items:center; font-size:13px; flex-shrink:0; }
+        .ci-gold{background:var(--gold-dim)} .ci-red{background:var(--red-glow)} .ci-green{background:var(--green-glow)} .ci-blue{background:var(--blue-glow)}
+        .card-body { padding:22px 24px; }
+
+        /* ── FORM GRID ── */
+        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+        .span-2 { grid-column:1/-1; }
+
+        /* ── RANGE ── */
+        .range-row { display:flex; align-items:center; gap:10px; }
+        input[type="range"] {
+            flex:1; -webkit-appearance:none; height:3px; background:var(--bg-3); border-radius:2px;
+            padding:0; border:none; background-image:linear-gradient(var(--gold),var(--gold)); background-repeat:no-repeat;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance:none; width:16px; height:16px; border-radius:50%;
+            background:var(--gold); cursor:pointer; box-shadow:0 0 8px var(--gold-glow);
+        }
+        .range-val { font-family:'Syne',sans-serif; font-weight:700; font-size:14px; color:var(--gold); min-width:48px; text-align:right; }
+
+        /* ── RADIO ── */
+        .radio-group { display:flex; gap:8px; }
+        .radio-opt {
+            flex:1; display:flex; align-items:center; gap:7px; padding:9px 12px;
+            border:1px solid var(--border); border-radius:var(--r-sm); cursor:pointer;
+            font-size:13px; font-weight:500; color:var(--txt-2); transition:all .2s; user-select:none;
+        }
+        .radio-opt:has(input:checked){ border-color:var(--gold); background:var(--gold-dim); color:var(--gold); }
+        .radio-opt input[type="radio"]{ width:14px; height:14px; padding:0; accent-color:var(--gold); cursor:pointer; }
+
+        .hr { height:1px; background:var(--border); margin:16px 0; }
+
+        /* ── BUTTONS ── */
+        .btn {
+            display:inline-flex; align-items:center; justify-content:center; gap:7px;
+            border:none; border-radius:var(--r-sm); font-family:'DM Sans',sans-serif;
+            font-weight:600; cursor:pointer; transition:all .18s ease; white-space:nowrap;
+        }
+        .btn-lg { padding:13px 20px; font-size:15px; width:100%; margin-top:6px; }
+        .btn-sm { padding:8px 14px; font-size:13px; }
+        .btn-gold { background:linear-gradient(135deg,var(--gold) 0%,#e8870a 100%); color:#07090e; box-shadow:0 4px 16px var(--gold-glow); }
+        .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(245,166,35,.35); }
+        .btn-gold:active { transform:translateY(0); }
+        .btn-blue { background:var(--blue-glow); border:1px solid rgba(96,165,250,.2); color:var(--blue); }
+        .btn-blue:hover { background:rgba(96,165,250,.2); }
+        .btn-blue.copied { background:var(--green-glow); border-color:rgba(34,197,94,.3); color:var(--green); }
+        .btn-gold-outline { background:var(--gold-dim); border:1px solid rgba(245,166,35,.25); color:var(--gold); }
+        .btn-gold-outline:hover { background:rgba(245,166,35,.18); }
+        .btn-ghost { background:transparent; border:1px solid var(--border); color:var(--txt-2); }
+        .btn-ghost:hover { border-color:var(--txt-3); color:var(--txt-1); }
+        .btn-group { display:flex; gap:8px; flex-wrap:wrap; }
+
+        /* ── RESULTS ── */
+        .empty-state { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; padding:48px 20px; color:var(--txt-3); text-align:center; }
+        .empty-icon { font-size:36px; opacity:.35; }
+        .empty-state p { font-size:14px; line-height:1.55; }
+        .results-stack { display:flex; flex-direction:column; gap:10px; }
+        .result-row { background:var(--bg-input); border:1px solid var(--border); border-radius:var(--r); padding:13px 18px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+        .result-row.r-danger { border-color:rgba(240,82,82,.25); background:var(--red-glow); }
+        .result-row.r-gold   { border-color:rgba(245,166,35,.35); background:var(--gold-dim); }
+        .r-label { font-size:13px; color:var(--txt-2); }
+        .r-label small { display:block; font-size:11px; color:var(--txt-3); margin-top:3px; }
+        .r-val { font-family:'Syne',sans-serif; font-size:17px; font-weight:700; }
+        .r-val.v-default{color:var(--txt-1)} .r-val.v-red{color:var(--red);font-size:22px} .r-val.v-gold{color:var(--gold);font-size:24px} .r-val.v-green{color:var(--green)}
+        .mini-bar { height:4px; background:var(--bg-3); border-radius:2px; overflow:hidden; margin-top:5px; width:120px; }
+        .mini-bar-fill { height:100%; border-radius:2px; transition:width .8s cubic-bezier(.4,0,.2,1); }
+        .fill-red{background:var(--red)} .fill-gold{background:var(--gold)}
+        .status-badge { display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:20px; font-size:11.5px; font-weight:700; }
+        .sb-ok{background:var(--green-glow);color:var(--green)} .sb-warn{background:var(--orange-glow);color:var(--orange)} .sb-danger{background:var(--red-glow);color:var(--red)}
+
+        /* ── NOTICE ── */
+        .notice-section { margin-bottom:20px; display:none; }
+        .tab-rail { display:flex; gap:3px; background:var(--bg-input); padding:3px; border-radius:var(--r-sm); }
+        .tab-btn { flex:1; padding:8px 14px; border:none; background:transparent; color:var(--txt-3); font-size:12.5px; font-weight:600; font-family:'DM Sans',sans-serif; border-radius:4px; cursor:pointer; transition:all .18s; white-space:nowrap; }
+        .tab-btn.active { background:var(--bg-2); color:var(--txt-1); }
+        .tab-btn:hover:not(.active){ color:var(--txt-2); }
+        .notice-box {
+            background:var(--bg-input); border:1px solid var(--border); border-radius:var(--r);
+            padding:26px 28px; font-family:'DM Mono','Courier New',monospace; font-size:13.5px;
+            line-height:1.85; color:var(--txt-1); white-space:pre-wrap;
+            min-height:280px; max-height:520px; overflow-y:auto; word-break:break-word;
+        }
+
+        /* ── TEMPLATES ── */
+        .section-title-row { display:flex; align-items:baseline; gap:10px; margin-bottom:16px; }
+        .sec-title { font-family:'Syne',sans-serif; font-size:18px; font-weight:700; }
+        .sec-sub { font-size:13px; color:var(--txt-3); }
+        .templates-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:20px; }
+        @media(max-width:700px){ .templates-grid{grid-template-columns:1fr} }
+        .tmpl-card { background:var(--bg-1); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; transition:border-color .2s,transform .2s; }
+        .tmpl-card:hover { border-color:var(--border-hover); transform:translateY(-3px); }
+        .tmpl-head { padding:14px 18px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px; }
+        .tmpl-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+        .dot-g{background:var(--green);box-shadow:0 0 6px var(--green)} .dot-o{background:var(--orange);box-shadow:0 0 6px var(--orange)} .dot-r{background:var(--red);box-shadow:0 0 6px var(--red)}
+        .tmpl-name { font-size:13px; font-weight:700; flex:1; }
+        .tmpl-chip { font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; text-transform:uppercase; letter-spacing:.5px; }
+        .chip-g{background:var(--green-glow);color:var(--green)} .chip-o{background:var(--orange-glow);color:var(--orange)} .chip-r{background:var(--red-glow);color:var(--red)}
+        .tmpl-body { padding:14px 18px; }
+        .tmpl-desc { font-size:12.5px; color:var(--txt-2); margin-bottom:10px; line-height:1.5; }
+        .tmpl-quote { font-size:12px; color:var(--txt-3); font-style:italic; border-left:2px solid var(--border); padding-left:10px; margin-bottom:14px; line-height:1.5; }
+
+        /* ── TOAST ── */
+        .toast {
+            position:fixed; bottom:24px; right:24px; z-index:999;
+            background:var(--bg-2); border:1px solid; padding:11px 18px; border-radius:var(--r-sm);
+            font-size:13.5px; font-weight:600; display:flex; align-items:center; gap:8px;
+            transform:translateY(80px); opacity:0; transition:all .3s cubic-bezier(.4,0,.2,1); pointer-events:none;
+        }
+        .toast.show { transform:translateY(0); opacity:1; }
+        .toast.t-success{border-color:rgba(34,197,94,.3);color:var(--green)} .toast.t-error{border-color:rgba(240,82,82,.3);color:var(--red)}
+
+        @keyframes slideIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+        .slide-in { animation:slideIn .35s ease; }
+
+        /* ── FOOTER ── */
+        .footer { border-top:1px solid var(--border); padding:28px 28px 36px; text-align:center; }
+        .footer-logo { font-family:'Syne',sans-serif; font-weight:700; font-size:15px; color:var(--gold); margin-bottom:8px; }
+        .footer-sub { font-size:12.5px; color:var(--txt-3); max-width:480px; margin:0 auto; line-height:1.6; }
+
+        /* ── RESPONSIVE ── */
+        @media(max-width:600px){
+            .hero{padding:56px 20px 44px} .hero-stat{padding:0 18px}
+            .main{padding:0 16px 60px} .settings-strip{flex-direction:column;align-items:flex-start}
+            .nav{padding:0 16px} .card-body{padding:18px 16px} .card-head{padding:16px 16px 12px}
+            .notice-box{padding:18px 16px;font-size:13px} .form-grid{grid-template-columns:1fr}
+        }
+        @media(max-width:400px){ .tab-btn{padding:7px 8px;font-size:11px} }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+    <div class="nav-brand">
+        <div class="nav-logo-mark">💸</div>
+        <div class="nav-brand-name">Cobro<span>Pro</span></div>
+    </div>
+    <div class="nav-pill">Kit para Freelancers</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-eyebrow"><span class="eyebrow-dot"></span>¿Clientes que no pagan?</div>
+        <h1>Dejá de perseguir.<br>Empezá a <em>cobrar.</em></h1>
+        <p class="hero-sub">Calculá intereses por mora, generá avisos de cobro profesionales y enviá emails listos para copiar — en menos de 3 minutos.</p>
+        <div class="hero-stats">
+            <div class="hero-stat"><div class="hero-stat-num">3 min</div><div class="hero-stat-label">Para generar un aviso</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Tipos de aviso</div></div>
+            <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-label">Gratis</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- BARRA DE TUS DATOS -->
+    <div class="settings-strip">
+        <div class="strip-label">⚙️ Tus datos</div>
+
+        <div class="field" style="flex:2;min-width:150px">
+            <label>Tu Nombre / Empresa</label>
+            <input type="text" id="companyName" placeholder="Estudio Acme">
+        </div>
+
+        <div class="field" style="flex:2;min-width:160px">
+            <label>Tu Email</label>
+            <input type="email" id="contactEmail" placeholder="hola@tuempresa.com">
+        </div>
+
+        <div class="field" style="flex:1;min-width:100px">
+            <label>Moneda</label>
+            <select id="currency">
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="GBP">GBP (£)</option>
+                <option value="ARS" selected>ARS ($)</option>
+                <option value="MXN">MXN ($)</option>
+                <option value="COP">COP ($)</option>
+                <option value="BRL">BRL (R$)</option>
+            </select>
+        </div>
+
+        <div class="field" style="flex:3;min-width:220px">
+            <label>Datos de Pago / CBU / Alias / Link de cobro</label>
+            <input type="text" id="paymentDetails" placeholder="CBU: 0000123... · Alias: tuempresa · MercadoPago: link">
+        </div>
+    </div>
+
+    <!-- CALCULADORA + RESULTADOS -->
+    <div class="tool-grid">
+
+        <!-- CALCULADORA -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-title"><div class="card-icon ci-gold">📄</div>Datos de la Factura</div>
+            </div>
+            <div class="card-body">
+                <div class="form-grid">
+                    <div class="field">
+                        <label>Nombre del Cliente *</label>
+                        <input type="text" id="clientName" placeholder="Juan García">
+                    </div>
+                    <div class="field">
+                        <label>Nº de Factura *</label>
+                        <input type="text" id="invoiceNumber" placeholder="FAC-2024-001">
+                    </div>
+                    <div class="field">
+                        <label>Monto de la Factura *</label>
+                        <input type="number" id="originalAmount" placeholder="150000" min="0" step="0.01">
+                    </div>
+                    <div class="field">
+                        <label>Nombre del Proyecto</label>
+                        <input type="text" id="projectName" placeholder="Rediseño de marca">
+                    </div>
+                    <div class="field">
+                        <label>Fecha de Emisión</label>
+                        <input type="date" id="invoiceDate">
+                    </div>
+                    <div class="field">
+                        <label>Fecha de Vencimiento *</label>
+                        <input type="date" id="dueDate">
+                    </div>
+                    <div class="field span-2">
+                        <label>Email del Cliente</label>
+                        <input type="email" id="clientEmail" placeholder="cliente@empresa.com">
+                    </div>
+                </div>
+
+                <div class="hr"></div>
+
+                <div class="field" style="margin-bottom:12px">
+                    <label>Tipo de Cargo por Mora</label>
+                    <div class="radio-group">
+                        <label class="radio-opt">
+                            <input type="radio" name="feeType" value="percentage" id="feeTypePercent" checked>
+                            % Mensual
+                        </label>
+                        <label class="radio-opt">
+                            <input type="radio" name="feeType" value="flat" id="feeTypeFlat">
+                            Monto fijo / día
+                        </label>
+                    </div>
+                </div>
+
+                <div class="field">
+                    <label id="feeRateLabel">Tasa Mensual de Mora</label>
+                    <div class="range-row">
+                        <input type="range" id="feeRate" min="0.5" max="10" step="0.5" value="3">
+                        <div class="range-val"><span id="displayRate">3</span>%</div>
+                    </div>
+                </div>
+
+                <button class="btn btn-gold btn-lg" onclick="calcularCargos()">
+                    ⚡ Calcular Cargos por Mora
+                </button>
+            </div>
+        </div>
+
+        <!-- RESULTADOS -->
+        <div class="card">
+            <div class="card-head">
+                <div class="card-title"><div class="card-icon ci-red">📊</div>Resumen de Cargos</div>
+                <div id="summaryBadge"></div>
+            </div>
+            <div class="card-body">
+                <div id="resultsPanel">
+                    <div class="empty-state">
+                        <div class="empty-icon">🧾</div>
+                        <p>Completá los datos de la factura<br>y presioná <strong>Calcular</strong> para ver el desglose</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- GENERADOR DE AVISO -->
+    <div class="notice-section card" id="noticeSection">
+        <div class="card-head">
+            <div class="card-title"><div class="card-icon ci-gold">📝</div>Aviso Generado</div>
+            <div class="tab-rail" id="noticeTabs">
+                <button class="tab-btn active" onclick="cambiarTab('formal',this)">📋 Aviso Formal</button>
+                <button class="tab-btn"        onclick="cambiarTab('email', this)">✉️ Email Listo</button>
+                <button class="tab-btn"        onclick="cambiarTab('legal', this)">⚖️ Aviso Legal</button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="notice-box" id="noticeBox"></div>
+            <div class="btn-group" style="margin-top:14px">
+                <button class="btn btn-blue btn-sm" id="copyNoticeBtn" onclick="copiarAviso()">📋 Copiar Aviso</button>
+                <button class="btn btn-gold-outline btn-sm" onclick="descargarAviso()">⬇️ Descargar .txt</button>
+                <button class="btn btn-ghost btn-sm" onclick="recordatorioAuto()">✉️ Recordatorio Auto</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PLANTILLAS DE EMAIL -->
+    <div>
+        <div class="section-title-row">
+            <div class="sec-title">📬 Plantillas de Email</div>
+            <div class="sec-sub">Copiá, personalizá y enviá.</div>
+        </div>
+        <div class="templates-grid">
+
+            <div class="tmpl-card">
+                <div class="tmpl-head">
+                    <div class="tmpl-dot dot-g"></div>
+                    <div class="tmpl-name">Recordatorio Amigable</div>
+                    <div class="tmpl-chip chip-g">Suave</div>
+                </div>
+                <div class="tmpl-body">
+                    <div class="tmpl-desc">Ideal para 1 a 7 días de atraso. Tono cálido, sin confrontación.</div>
+                    <div class="tmpl-quote">"Hola [Cliente], te escribo para recordarte que la Factura Nº[XXX] venció el [fecha]…"</div>
+                    <div class="btn-group">
+                        <button class="btn btn-blue btn-sm" id="copyTpl1" onclick="copiarPlantilla('amigable')">📋 Copiar Email</button>
+                        <button class="btn btn-ghost btn-sm" onclick="verPlantilla('amigable')">Ver</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tmpl-card">
+                <div class="tmpl-head">
+                    <div class="tmpl-dot dot-o"></div>
+                    <div class="tmpl-name">Aviso de Mora</div>
+                    <div class="tmpl-chip chip-o">Firme</div>
+                </div>
+                <div class="tmpl-body">
+                    <div class="tmpl-desc">Para 8 a 30 días de atraso. Firme pero profesional. Menciona los cargos.</div>
+                    <div class="tmpl-quote">"Estimado/a [Cliente], la Factura Nº[XXX] se encuentra impaga con X días de atraso…"</div>
+                    <div class="btn-group">
+                        <button class="btn btn-blue btn-sm" id="copyTpl2" onclick="copiarPlantilla('mora')">📋 Copiar Email</button>
+                        <button class="btn btn-ghost btn-sm" onclick="verPlantilla('mora')">Ver</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tmpl-card">
+                <div class="tmpl-head">
+                    <div class="tmpl-dot dot-r"></div>
+                    <div class="tmpl-name">Último Aviso</div>
+                    <div class="tmpl-chip chip-r">Final</div>
+                </div>
+                <div class="tmpl-body">
+                    <div class="tmpl-desc">Más de 30 días. Urgente y formal. Indica plazo para acciones legales.</div>
+                    <div class="tmpl-quote">"ÚLTIMO AVISO: A pesar de los recordatorios, la Factura Nº[XXX] sigue impaga…"</div>
+                    <div class="btn-group">
+                        <button class="btn btn-blue btn-sm" id="copyTpl3" onclick="copiarPlantilla('final')">📋 Copiar Email</button>
+                        <button class="btn btn-ghost btn-sm" onclick="verPlantilla('final')">Ver</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<div class="toast" id="toast"></div>
+
+<footer class="footer">
+    <div class="footer-logo">💸 CobroPro — Kit de Cobro para Freelancers</div>
+    <div class="footer-sub">
+        Diseñado para freelancers y agencias independientes de Latinoamérica.
+        Las plantillas generadas son de uso informativo — consultá un profesional legal para acciones de cobro formales.
+    </div>
+</footer>
+
+<script>
+    /* ─── ESTADO ─── */
+    let calc      = null;
+    let tabActiva = 'formal';
+
+    /* ─── INIT ─── */
+    (function init() {
+        const hoy      = new Date();
+        const fEmision = new Date(hoy); fEmision.setDate(fEmision.getDate() - 45);
+        const fVenc    = new Date(hoy); fVenc.setDate(fVenc.getDate() - 15);
+        document.getElementById('invoiceDate').valueAsDate = fEmision;
+        document.getElementById('dueDate').valueAsDate     = fVenc;
+
+        const slider = document.getElementById('feeRate');
+        slider.addEventListener('input', () => {
+            document.getElementById('displayRate').textContent = slider.value;
+            actualizarSlider(slider);
+        });
+        actualizarSlider(slider);
+
+        document.querySelectorAll('input[name="feeType"]').forEach(r => {
+            r.addEventListener('change', () => {
+                const esFlat = document.getElementById('feeTypeFlat').checked;
+                document.getElementById('feeRateLabel').textContent = esFlat ? 'Monto Fijo por Día' : 'Tasa Mensual de Mora';
+                const rv = document.querySelector('.range-val');
+                if (rv) rv.innerHTML = `<span id="displayRate">${slider.value}</span>${esFlat ? ' /día' : '%'}`;
+            });
+        });
+    })();
+
+    function actualizarSlider(slider) {
+        const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+        slider.style.backgroundSize = pct + '% 100%';
+    }
+
+    /* ─── MONEDA ─── */
+    function simbolo(code) {
+        return { USD:'$', EUR:'€', GBP:'£', ARS:'$', MXN:'$', COP:'$', BRL:'R$' }[code] || '$';
+    }
+    function fmt(monto, sym) {
+        return sym + monto.toLocaleString('es-AR', { minimumFractionDigits:2, maximumFractionDigits:2 });
+    }
+
+    /* ─── CALCULAR ─── */
+    function calcularCargos() {
+        const clientName    = document.getElementById('clientName').value.trim();
+        const invoiceNumber = document.getElementById('invoiceNumber').value.trim();
+        const monto         = parseFloat(document.getElementById('originalAmount').value);
+        const vencVal       = document.getElementById('dueDate').value;
+        const emisVal       = document.getElementById('invoiceDate').value;
+        const proyecto      = document.getElementById('projectName').value.trim();
+        const clientEmail   = document.getElementById('clientEmail').value.trim();
+        const moneda        = document.getElementById('currency').value;
+        const tasa          = parseFloat(document.getElementById('feeRate').value);
+        const esFlat        = document.getElementById('feeTypeFlat').checked;
+        const empresa       = document.getElementById('companyName').value.trim()    || 'Tu Empresa';
+        const emailC        = document.getElementById('contactEmail').value.trim()   || 'tu@email.com';
+        const datosPago     = document.getElementById('paymentDetails').value.trim() || '[Completá tus datos de pago]';
+
+        if (!clientName || !invoiceNumber || isNaN(monto) || !vencVal) {
+            mostrarToast('⚠️ Completá todos los campos obligatorios (*).', 'error');
+            return;
+        }
+
+        const fechaVenc  = new Date(vencVal + 'T00:00:00');
+        const fechaEmis  = emisVal ? new Date(emisVal + 'T00:00:00') : null;
+        const hoy        = new Date(); hoy.setHours(0,0,0,0);
+        const diasAtraso = Math.max(0, Math.floor((hoy - fechaVenc) / 86400000));
+
+        const sym         = simbolo(moneda);
+        const cargoDia    = esFlat ? tasa : (monto * (tasa / 100)) / 30;
+        const totalCargo  = cargoDia * diasAtraso;
+        const totalDebe   = monto + totalCargo;
+        const pctCargo    = monto > 0 ? (totalCargo / monto) * 100 : 0;
+        const fmtFecha    = d => d.toLocaleDateString('es-AR', { year:'numeric', month:'long', day:'numeric' });
+
+        calc = {
+            clientName, invoiceNumber, monto, fechaVenc, fechaEmis,
+            proyecto, clientEmail, empresa, emailC, datosPago,
+            diasAtraso, cargoDia, totalCargo, totalDebe, pctCargo, tasa, esFlat, moneda, sym,
+            hoyFmt:  fmtFecha(hoy),
+            vencFmt: fmtFecha(fechaVenc),
+            emisFmt: fechaEmis ? fmtFecha(fechaEmis) : 'N/D',
+            f: a => fmt(a, sym),
+        };
+
+        renderizarResultados(calc);
+        if (diasAtraso > 0) renderizarAviso('formal');
+        mostrarToast('✅ ¡Cargos calculados con éxito!');
+    }
+
+    /* ─── RESULTADOS ─── */
+    function renderizarResultados(d) {
+        let bClass, bTexto;
+        if (d.diasAtraso === 0)      { bClass='sb-ok';    bTexto='✅ Al día'; }
+        else if (d.diasAtraso <= 7)  { bClass='sb-warn';  bTexto=`⚠️ ${d.diasAtraso}d de atraso`; }
+        else if (d.diasAtraso <= 30) { bClass='sb-warn';  bTexto=`🟡 ${d.diasAtraso}d de atraso`; }
+        else                          { bClass='sb-danger'; bTexto=`🔴 ${d.diasAtraso}d de atraso`; }
+
+        document.getElementById('summaryBadge').innerHTML = `<span class="status-badge ${bClass}">${bTexto}</span>`;
+
+        const barPct  = Math.min(100,(d.diasAtraso/60)*100);
+        const valPct  = Math.min(100,(d.pctCargo/20)*100);
+        const fillCls = d.diasAtraso > 30 ? 'fill-red' : 'fill-gold';
+
+        const panel = document.getElementById('resultsPanel');
+        panel.classList.remove('slide-in'); void panel.offsetWidth; panel.classList.add('slide-in');
+
+        panel.innerHTML = `
+        <div class="results-stack">
+            <div class="result-row">
+                <div class="r-label">Monto Original</div>
+                <div class="r-val v-default">${d.f(d.monto)}</div>
+            </div>
+            <div class="result-row">
+                <div class="r-label">Fecha de Vencimiento<small>${d.vencFmt}</small></div>
+                <div class="r-val v-default" style="font-size:14px">${d.vencFmt}</div>
+            </div>
+            <div class="result-row ${d.diasAtraso>0?'r-danger':''}">
+                <div class="r-label">Días de Atraso
+                    <div class="mini-bar"><div class="mini-bar-fill ${fillCls}" style="width:${barPct}%"></div></div>
+                </div>
+                <div class="r-val ${d.diasAtraso>0?'v-red':'v-green'}">${d.diasAtraso}</div>
+            </div>
+            <div class="result-row">
+                <div class="r-label">Cargo Diario<small>${d.esFlat?'monto fijo':d.tasa+'% / mes'}</small></div>
+                <div class="r-val v-default">${d.f(d.cargoDia)}</div>
+            </div>
+            <div class="result-row">
+                <div class="r-label">Total Cargos por Mora
+                    <div class="mini-bar"><div class="mini-bar-fill ${fillCls}" style="width:${valPct}%"></div></div>
+                </div>
+                <div class="r-val ${d.totalCargo>0?'v-red':'v-green'}">${d.f(d.totalCargo)}</div>
+            </div>
+            <div class="result-row r-gold">
+                <div class="r-label" style="font-weight:700;font-size:14px;color:var(--txt-1)">Total Adeudado</div>
+                <div class="r-val v-gold">${d.f(d.totalDebe)}</div>
+            </div>
+        </div>`;
+    }
+
+    /* ─── TABS ─── */
+    function cambiarTab(tipo, btn) {
+        tabActiva = tipo;
+        document.querySelectorAll('#noticeTabs .tab-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (calc) renderizarAviso(tipo);
+    }
+
+    function renderizarAviso(tipo) {
+        const mapa = { formal: avisoFormal, email: avisoEmail, legal: avisoLegal };
+        document.getElementById('noticeBox').textContent = (mapa[tipo] || avisoFormal)(calc);
+        const sec = document.getElementById('noticeSection');
+        sec.style.display = 'block';
+        if (tipo === 'formal') setTimeout(() => sec.scrollIntoView({ behavior:'smooth', block:'nearest' }), 120);
+    }
+
+    /* ─── AVISO FORMAL ─── */
+    function avisoFormal(d) {
+        return `AVISO DE PAGO PENDIENTE
+════════════════════════════════════════════════
+
+Fecha:             ${d.hoyFmt}
+De:                ${d.empresa}
+Para:              ${d.clientName}${d.clientEmail ? '\nEmail cliente:     ' + d.clientEmail : ''}
+Factura:           ${d.invoiceNumber}${d.proyecto ? '\nProyecto:          ' + d.proyecto : ''}
+
+════════════════════════════════════════════════
+
+Estimado/a ${d.clientName}:
+
+Por medio del presente le informamos que la Factura Nº ${d.invoiceNumber}
+por un monto de ${d.f(d.monto)}, con vencimiento el ${d.vencFmt},
+se encuentra impaga a la fecha.
+
+A la fecha de este aviso (${d.hoyFmt}), dicha factura registra
+${d.diasAtraso} día${d.diasAtraso !== 1 ? 's' : ''} de atraso en el pago.
+
+De conformidad con los términos de pago acordados, se aplica un cargo
+por mora de ${d.esFlat ? d.f(d.cargoDia) + ' por día' : d.tasa + '% mensual'}, calculado en forma diaria.
+
+────────────────────────────────────────────────
+DETALLE DEL MONTO ADEUDADO
+────────────────────────────────────────────────
+Monto original de factura:      ${d.f(d.monto)}
+Tasa de mora aplicada:          ${d.esFlat ? d.f(d.cargoDia) + ' / día' : d.tasa + '% mensual'}
+Cargo diario acumulado:         ${d.f(d.cargoDia)} / día
+Días de atraso:                 ${d.diasAtraso} días
+Total de cargos por mora:       ${d.f(d.totalCargo)}
+────────────────────────────────────────────────
+TOTAL ADEUDADO A LA FECHA:      ${d.f(d.totalDebe)}
+════════════════════════════════════════════════
+
+Le solicitamos que efectúe el pago de ${d.f(d.totalDebe)} dentro de los
+próximos 5 días hábiles para evitar cargos adicionales.
+
+MEDIOS DE PAGO:
+→ ${d.datosPago}
+
+Si ya realizó el pago, ignorá este aviso y enviá el comprobante a
+${d.emailC}.
+
+Para consultas o acordar un plan de pago, contactanos:
+Email: ${d.emailC}
+
+Cordialmente,
+
+${d.empresa}
+${d.emailC}
+
+════════════════════════════════════════════════
+Los cargos continúan acumulándose a razón de ${d.f(d.cargoDia)}/día
+hasta recibirse el pago total.
+`;
+    }
+
+    /* ─── EMAIL LISTO ─── */
+    function avisoEmail(d) {
+        return `Asunto: Factura ${d.invoiceNumber} pendiente — ${d.diasAtraso} días de atraso
+
+Para:  ${d.clientEmail || d.clientName}
+De:    ${d.emailC}
+Fecha: ${d.hoyFmt}
+
+──────────────────────────────────────────────
+
+Hola ${d.clientName},
+
+Te escribo para hacer seguimiento de la Factura Nº ${d.invoiceNumber}${d.proyecto ? ' por el proyecto "' + d.proyecto + '"' : ''}, que venció el ${d.vencFmt}.
+
+A la fecha, esta factura registra ${d.diasAtraso} días de atraso.
+
+RESUMEN:
+  Nº de factura:         ${d.invoiceNumber}
+  Monto original:        ${d.f(d.monto)}
+  Fecha de vencimiento:  ${d.vencFmt}
+  Días de atraso:        ${d.diasAtraso}
+  Cargos por mora:       ${d.f(d.totalCargo)}
+  ─────────────────────────────────────────
+  TOTAL ADEUDADO HOY:    ${d.f(d.totalDebe)}
+
+Te agradezco que realices el pago dentro de los próximos 5 días hábiles.
+
+CÓMO PAGAR:
+→ ${d.datosPago}
+
+Si hay algún inconveniente, respondé este email y lo resolvemos juntos.
+
+¡Gracias! Quedo a disposición.
+
+Saludos,
+${d.empresa}
+${d.emailC}
+
+──────────────────────────────────────────────
+Factura: ${d.invoiceNumber} | Saldo: ${d.f(d.totalDebe)}
+`;
+    }
+
+    /* ─── AVISO LEGAL ─── */
+    function avisoLegal(d) {
+        return `INTIMACIÓN FORMAL DE PAGO
+════════════════════════════════════════════════════════
+
+FECHA:         ${d.hoyFmt}
+
+ACREEDOR:      ${d.empresa}
+               ${d.emailC}
+
+DEUDOR:        ${d.clientName}
+               ${d.clientEmail || '[Dirección del deudor]'}
+
+REFERENCIA:    Factura Nº ${d.invoiceNumber}${d.proyecto ? '\n               Proyecto: ' + d.proyecto : ''}
+               Fecha de emisión: ${d.emisFmt}
+
+════════════════════════════════════════════════════════
+
+A: ${d.clientName}
+
+Por medio del presente instrumento, me dirijo a usted a fin de
+INTIMARLE fehacientemente el pago de la suma de ${d.f(d.monto)},
+correspondiente a la Factura Nº ${d.invoiceNumber} de fecha ${d.emisFmt}.
+
+Dicho monto debió abonarse el ${d.vencFmt}, habiendo transcurrido a la
+fecha ${d.diasAtraso} días calendario sin recibirse pago alguno.
+
+────────────────────────────────────────────────────────
+ESTADO DE LA DEUDA
+────────────────────────────────────────────────────────
+Monto Principal:                       ${d.f(d.monto)}
+Cargos por mora (${d.esFlat ? d.f(d.cargoDia) + '/día' : d.tasa + '%/mes'}):       ${d.f(d.totalCargo)}
+────────────────────────────────────────────────────────
+TOTAL ADEUDADO A LA FECHA:             ${d.f(d.totalDebe)}
+════════════════════════════════════════════════════════
+
+Se le INTIMA a abonar ${d.f(d.totalDebe)} dentro de los 7 (siete)
+días corridos contados desde la recepción de la presente.
+
+ANTE INCUMPLIMIENTO SE PROCEDERÁ A:
+  1. Iniciar gestión de cobro extrajudicial;
+  2. Iniciar acciones civiles/comerciales por capital, intereses y costas;
+  3. Reportar el incumplimiento a registros de deudores morosos.
+
+Los cargos continúan devengándose a ${d.f(d.cargoDia)}/día hasta
+cancelación total.
+
+PAGO A TRAVÉS DE:
+→ ${d.datosPago}
+
+Para disputar este reclamo, escribir a ${d.emailC} dentro de 5 días hábiles.
+
+${d.empresa}
+${d.emailC}
+Fecha: ${d.hoyFmt}
+
+════════════════════════════════════════════════════════
+Emitido según términos de pago acordados al inicio de la relación comercial.
+SIN PERJUICIO DE LOS DERECHOS QUE ME ASISTEN.
+`;
+    }
+
+    /* ─── PLANTILLAS DE EMAIL ─── */
+    function obtenerPlantilla(tipo) {
+        const d = calc || {
+            clientName:'[Nombre del cliente]', invoiceNumber:'FAC-001', proyecto:'[Proyecto]',
+            empresa:'[Tu nombre]', emailC:'[tu@email.com]', datosPago:'[Tus datos de pago]',
+            diasAtraso:0, f:a=>'$'+parseFloat(a).toFixed(2),
+            monto:0, totalDebe:0, totalCargo:0, tasa:3, esFlat:false,
+            vencFmt:'[Fecha de vencimiento]',
+            hoyFmt: new Date().toLocaleDateString('es-AR',{year:'numeric',month:'long',day:'numeric'}),
+        };
+
+        if (tipo === 'amigable') return `Asunto: Recordatorio — Factura ${d.invoiceNumber} pendiente
+
+Hola ${d.clientName},
+
+¡Espero que estés muy bien! Te escribo para recordarte que la Factura Nº ${d.invoiceNumber}${d.proyecto ? ' por "' + d.proyecto + '"' : ''} — ${d.f(d.monto)} — venció el ${d.vencFmt}.
+
+Sé que a veces estas cosas se pasan por alto, así que simplemente quería chequear que no se haya perdido.
+
+Si ya realizaste el pago, ¡muchas gracias! Ignorá este mensaje y mandame el comprobante cuando puedas.
+
+Si no, te agradezco que lo resuelvas cuando puedas:
+→ ${d.datosPago}
+
+Cualquier consulta, estoy a disposición.
+
+¡Gracias! Un placer trabajar con vos.
+
+Saludos,
+${d.empresa}
+${d.emailC}`;
+
+        if (tipo === 'mora') return `Asunto: Factura ${d.invoiceNumber} impaga — Cargos por mora acumulados
+
+Estimado/a ${d.clientName}:
+
+Le escribo en relación a la Factura Nº ${d.invoiceNumber}${d.proyecto ? ' (' + d.proyecto + ')' : ''}, con vencimiento el ${d.vencFmt}, que registra ${d.diasAtraso} días de atraso.
+
+El saldo adeudado, incluyendo cargos por mora (${d.esFlat ? d.f(d.cargoDia) + '/día' : d.tasa + '%/mes'}), asciende a ${d.f(d.totalDebe)}.
+
+RESUMEN:
+────────────────────────────────────
+Monto original:     ${d.f(d.monto)}
+Cargos por mora:    ${d.f(d.totalCargo)}
+Total adeudado:     ${d.f(d.totalDebe)}
+────────────────────────────────────
+
+Le solicito regularizar el saldo dentro de los próximos 5 días hábiles.
+
+CÓMO PAGAR:
+→ ${d.datosPago}
+
+Si existe algún inconveniente, comuníquese de inmediato a ${d.emailC}.
+
+Atentamente,
+${d.empresa}
+${d.emailC}`;
+
+        if (tipo === 'final') return `Asunto: ÚLTIMO AVISO — Factura ${d.invoiceNumber} | Acción inmediata requerida
+
+Estimado/a ${d.clientName}:
+
+El presente es un ÚLTIMO AVISO respecto de la Factura Nº ${d.invoiceNumber}
+por ${d.f(d.monto)}, con vencimiento el ${d.vencFmt}, que acumula ${d.diasAtraso} días de atraso.
+
+A pesar de los recordatorios previos, esta factura continúa impaga.
+El total adeudado asciende a ${d.f(d.totalDebe)}.
+
+SE REQUIERE EL PAGO TOTAL EN 7 DÍAS CORRIDOS.
+
+El incumplimiento resultará en:
+  1. Derivación a agencia de cobros extrajudiciales
+  2. Acciones civiles/comerciales para recupero de deuda más costas
+  3. Cese de toda relación comercial presente y futura
+
+REALIZAR EL PAGO A TRAVÉS DE:
+→ ${d.datosPago}
+
+Si considerás que este aviso es un error, comunicarte de inmediato a:
+${d.emailC}
+
+Esta comunicación se realiza sin perjuicio de los derechos que me asisten.
+
+${d.empresa}
+${d.emailC}
+${d.hoyFmt}`;
+
+        return '';
+    }
+
+    /* ─── ACCIONES ─── */
+    function copiarAviso() {
+        const texto = document.getElementById('noticeBox').textContent;
+        if (!texto.trim()) { mostrarToast('⚠️ Primero generá un aviso.', 'error'); return; }
+        navigator.clipboard.writeText(texto).then(() => {
+            const btn = document.getElementById('copyNoticeBtn');
+            btn.textContent = '✅ ¡Copiado!'; btn.classList.add('copied');
+            mostrarToast('✅ ¡Aviso copiado al portapapeles!');
+            setTimeout(() => { btn.textContent = '📋 Copiar Aviso'; btn.classList.remove('copied'); }, 2200);
+        });
+    }
+
+    function descargarAviso() {
+        const texto = document.getElementById('noticeBox').textContent;
+        if (!texto.trim()) { mostrarToast('⚠️ Primero generá un aviso.', 'error'); return; }
+        const fac  = (calc?.invoiceNumber || 'AVISO').replace(/[^a-z0-9]/gi, '-');
+        const blob = new Blob([texto], { type:'text/plain' });
+        const url  = URL.createObjectURL(blob);
+        const a    = document.createElement('a');
+        a.href = url; a.download = `aviso-${fac}-${tabActiva}.txt`;
+        document.body.appendChild(a); a.click();
+        document.body.removeChild(a); URL.revokeObjectURL(url);
+        mostrarToast('⬇️ ¡Aviso descargado!');
+    }
+
+    function recordatorioAuto() {
+        if (!calc) { mostrarToast('⚠️ Primero calculá los cargos.', 'error'); return; }
+        const tipo = calc.diasAtraso <= 7 ? 'amigable' : calc.diasAtraso <= 30 ? 'mora' : 'final';
+        document.getElementById('noticeBox').textContent = obtenerPlantilla(tipo);
+        const tabs = document.querySelectorAll('#noticeTabs .tab-btn');
+        tabs.forEach(b => b.classList.remove('active')); tabs[1].classList.add('active');
+        tabActiva = 'email';
+        mostrarToast('✅ ¡Email de recordatorio listo para copiar!');
+    }
+
+    function copiarPlantilla(tipo) {
+        const ids = { amigable:'copyTpl1', mora:'copyTpl2', final:'copyTpl3' };
+        navigator.clipboard.writeText(obtenerPlantilla(tipo)).then(() => {
+            mostrarToast('✅ ¡Email copiado al portapapeles!');
+            const btn = document.getElementById(ids[tipo]);
+            const orig = btn.textContent;
+            btn.textContent = '✅ ¡Copiado!'; btn.classList.add('copied');
+            setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2200);
+        });
+    }
+
+    function verPlantilla(tipo) {
+        document.getElementById('noticeBox').textContent = obtenerPlantilla(tipo);
+        const sec = document.getElementById('noticeSection');
+        sec.style.display = 'block';
+        const tabs = document.querySelectorAll('#noticeTabs .tab-btn');
+        tabs.forEach(b => b.classList.remove('active')); tabs[1].classList.add('active');
+        tabActiva = 'email';
+        setTimeout(() => sec.scrollIntoView({ behavior:'smooth', block:'start' }), 80);
+    }
+
+    /* ─── TOAST ─── */
+    let toastTimer = null;
+    function mostrarToast(msg, tipo = 'success') {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.className = `toast show t-${tipo}`;
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => el.classList.remove('show'), 3200);
+    }
+</script>
+</body>
+</html>
